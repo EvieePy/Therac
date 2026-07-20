@@ -5,6 +5,8 @@ description = "A small and powerful moderation bot for my servers."
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
+    "asyncpg>=0.31.0",
+    "asyncpg-stubs>=0.31.3",
     "discord-py>=2.7.1",
     "pyyaml>=6.0.3",
     "twitchio>=3.2.2",
