@@ -83,7 +83,7 @@ class SpamCog(commands.Cog):
 
         # Don't run spam checks on mods/admins...
         perms = member.guild_permissions
-        if perms.administrator or perms.ban_members:
+        if perms.administrator or perms.ban_members or perms.kick_members or perms.manage_guild:
             return
 
         rules = self.bot.rule_cache.get(guild.id, {}).get(type, None)
