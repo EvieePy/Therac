@@ -33,7 +33,14 @@ class TwitchConfigT(TypedDict):
     prefix: list[str]
 
 
+class DatabaseConfigT(TypedDict):
+    dsn: str
+    min_size: int
+    max_size: int
+
+
 class ConfigT(TypedDict):
     general: GeneralConfigT
+    database: DatabaseConfigT
     discord: DiscordConfigT
     twitch: TwitchConfigT
