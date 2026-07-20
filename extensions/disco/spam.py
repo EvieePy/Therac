@@ -218,6 +218,8 @@ class SpamCog(commands.Cog):
         for _ in range(3):
             try:
                 await member.ban(reason=f"AutoMod: {reason}")
+                LOGGER.info("Successful do ban for rule %s for (%s, %s).", rule.id, member, guild)
+                return
             except discord.NotFound:
                 LOGGER.debug("Unable to do ban for rule %s for (%s, %s). Member not found.", rule.id, member, guild)
                 break
@@ -226,9 +228,6 @@ class SpamCog(commands.Cog):
                 break
             except discord.HTTPException:
                 await asyncio.sleep(11)
-            else:
-                LOGGER.info("Successful do ban for rule %s for (%s, %s).", rule.id, member, guild)
-                break
 
     async def do_kick(
         self,
