@@ -32,7 +32,7 @@ LOGGER: logging.Logger = logging.getLogger(__name__)
 
 
 class SpamCache[K]:
-    def __init__(self, *, cleanup_interval: float) -> None:
+    def __init__(self, *, cleanup_interval: float = 15) -> None:
         self._cleanup_interval = cleanup_interval
         self._cache: dict[K, SpamCacheDataT] = {}
         self._cleanup_task: asyncio.Task[None] = asyncio.create_task(self._background_clean())
