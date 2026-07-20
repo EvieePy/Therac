@@ -1,5 +1,7 @@
 general:
   logging_level: 20
+database:
+  dsn: "postgres://postgres:postgres@localhost:5432/postgres"
 discord:
   token: ""
   prefixes:
