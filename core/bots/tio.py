@@ -13,18 +13,28 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
+from __future__ import annotations
+
 import logging
+from typing import TYPE_CHECKING
 
 from twitchio.ext import commands
 
 import core
 
 
+if TYPE_CHECKING:
+    from ..manager import BotManager
+
+
 LOGGER: logging.Logger = logging.getLogger(__name__)
 
 
 class TwitchBot(commands.Bot):
-    def __init__(self) -> None:
+    def __init__(self, manager: BotManager) -> None:
+        self.manager = manager
+        self.db = manager.db
+
         config = core.CONFIG["twitch"]
         super().__init__(**config)
 

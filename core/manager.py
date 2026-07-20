@@ -15,11 +15,15 @@ limitations under the License.
 
 from __future__ import annotations
 
-from typing import Any, Self
+from typing import TYPE_CHECKING, Any, Self
 
 from core import bots
 
 from .config import CONFIG
+
+
+if TYPE_CHECKING:
+    from database import Database
 
 
 __all__ = ("BotManager",)
@@ -29,6 +33,9 @@ class BotManager:
     dbot: bots.DiscordBot
     tbot: bots.TwitchBot
 
+    def __init__(self, *, database: Database) -> None:
+        self.db = database
+
     async def __aenter__(self) -> Self:
         return self
 
@@ -36,8 +43,8 @@ class BotManager:
         await self.close()
 
     async def run(self) -> None:
-        self.dbot = bots.DiscordBot()
-        self.tbot = bots.TwitchBot()
+        self.dbot = bots.DiscordBot(self)
+        self.tbot = bots.TwitchBot(self)
 
         async with self.dbot, self.tbot:
             await self.tbot.login()
