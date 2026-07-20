@@ -14,6 +14,7 @@ limitations under the License.
 """
 
 from . import bots as bots
+from .cache import SpamCache as SpamCache
 from .config import CONFIG as CONFIG
 from .manager import BotManager as BotManager
 from .utils import *

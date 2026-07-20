@@ -19,6 +19,7 @@ import logging
 import twitchio
 
 import core
+import database
 
 
 LOGGER: logging.Logger = logging.getLogger(__name__)
@@ -28,7 +29,8 @@ def main() -> None:
     twitchio.utils.setup_logging(level=core.CONFIG["general"]["logging_level"])
 
     async def runner() -> None:
-        async with core.BotManager() as manager:
+        async with database.Database() as db, core.BotManager(database=db) as manager:
+            await db.connect(core.CONFIG["database"]["dsn"])
             await manager.run()
 
     try:
